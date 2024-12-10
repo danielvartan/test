@@ -61,7 +61,7 @@ format:
     link-external-icon: false
     link-external-newwindow: false
     csl: csl/english-apa-author-date.csl
-    theme: [cosmo, scss/styles.scss, brand]
+    theme: [cosmo, brand, scss/styles.scss]
 
 google-scholar: false
 bibliography: references.bib

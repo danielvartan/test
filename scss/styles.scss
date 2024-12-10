@@ -3,38 +3,43 @@
 // See: <https://quarto.org/docs/output-formats/html-themes.htm>.
 // See: <https://quarto.org/docs/authoring/brand.html>.
 
-$body-color: $brand-gray;
 $toc-font-size: 1em !default;
 
 /*-- scss:rules --*/
 
+/* Body ----- */
+
+body {
+  color: $brand-gray;
+}
+
 /* Navigation ----- */
 
 .nav-link {
-  color: $brand-white; // !!! From _brand.yml !!!
+  color: $brand-white;
 }
 
 /* Headings ----- */
 
 h3 {
-  color: $primary;  // !!! From _brand.yml !!!
+  color: $primary;
 }
 
 h4 {
-  color: $secondary;  // !!! From _brand.yml !!!
+  color: $secondary;
 }
 
 /* Captions ----- */
 
 .panel-caption, .figure-caption, .subfigure-caption, .table-caption, figcaption, caption {
-  color: $tertiary; // !!! From _brand.yml !!!
+  color: $tertiary;
   font-size: 0.9rem;
   text-align: center;
 }
 
 .legend {
   font-size: .9rem;
-  color: $tertiary; // !!! From _brand.yml !!!
+  color: $tertiary;
   // text-align: left;
 }
 
