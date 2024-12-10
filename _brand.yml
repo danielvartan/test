@@ -1,0 +1,62 @@
+# For detailed documentation on the format, refer to:
+#
+# - https://posit-dev.github.io/brand-yml
+# - https://quarto.org/docs/authoring/brand.html
+
+meta:
+  name: Test
+  link:
+    home: https://danielvartan.github.io/test
+    github: https://github.com/danielvartan/test
+  description: Testing, testing, ... 🎤
+
+logo:
+  images:
+    favicon:
+      path: images/favicon.png
+      alt: "Logo favicon"
+
+color:
+  palette:
+    blue: "#084DBD" # PANTONE Saratoga® Signature Blue
+    yellow: "#F5C827"
+    white: "#FFFFFF"
+    gray: "#7a7a7a"
+    black: "#000000"
+  background: white
+  primary: blue
+  secondary: yellow
+  tertiary: gray
+  success: gray
+  info: gray
+  warning: gray
+  danger: gray
+  light: black
+  dark: white
+
+# # See:
+#
+# - https://fonts.google.com/
+# - https://beautifulwebtype.com/archivo-black/
+# - https://beautifulwebtype.com/archivo/
+# - https://beautifulwebtype.com/ia-writer-quattro/
+
+typography:
+  fonts:
+    - family: Archivo Black
+      source: google
+    - family: Archivo
+      source: google
+    - family: Source Code Pro
+      source: google
+  base:
+    family: Archivo
+  headings:
+    family: Archivo Black
+    color: black
+  monospace: Source Code Pro
+  monospace-inline:
+    color: black
+  link:
+    color: blue
+    decoration: underline

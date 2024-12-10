@@ -1,0 +1,120 @@
+```{r}
+#| label: setup
+#| include: false
+
+source(here::here("R/_setup.R"))
+```
+
+```{r}
+#| include: false
+
+library(magrittr)
+library(ggplot2)
+```
+
+```{r}
+#| include: false
+
+source(here::here("R", "utils.R"))
+```
+
+<!-- badges: start -->
+[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-green)](https://choosealicense.com/licenses/mit/)
+<!-- badges: end -->
+
+## Overview {#sec-overview}
+
+This is a test document. Move along, folks — nothing to see here! 👀🙈
+
+## Heading 2 {#sec-heading-2}
+
+*Lorem ipsum dolor* sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis **rhoncus** (`{r} pi |> format_to_md_latex("\\%") %>% paste0("n = ", .)`). Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum [@einstein1905a].
+
+### Heading 3 {#sec-heading-3}
+
+Quisque ut dolor gravida, placerat libero vel, euismod. Ambitioni dedisse **scripsisse** $`{r} format(10^5, big.mark = ",")`$ iudicaretur. Donec sed odio operae, eu vulputate felis rhoncus. *Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae* [@einstein1935].
+
+$$
+f(x, y) = f(x_{0}, y) + \cfrac{\partial f}{\partial x} (x_{0}, y) (x - x_{0}) + \cfrac{1}{2!} \cfrac{\partial^{2} f}{\partial x^{2}} (x_{0}, y) (x - x_{0})^{2} + \cdots 
+$$ {#eq-test}
+
+#### Heading 4 {#sec-heading-4}
+
+Ab illo tempore, ab est sed immemorabili. *Cum sociis natoque penatibus et magnis dis* `{r} 5^5 |> format_to_md_latex()` parturient @eq-test. Quam diu etiam furor iste tuus nos eludet?^[Fabio vel iudice vincam, sunt in culpa qui officia [@schelling1971].] Ut enim ad minim veniam, @sec-heading-5 (`@sec-heading-5`) or simply click [here](#sec-heading-5) (`[here](#sec-heading-5)`) quis nostrud exercitation [@fisher1932].
+
+##### Heading 5 {#sec-heading-5}
+
+Ab illo tempore, ab est sed immemorabili. **Cum sociis natoque penatibus et magnis dis** $`{r} format(exp(1), big.mark = ",")`$ parturient (@cnj-hypothesis-test). Quam diu etiam furor iste tuus nos eludet? Ut enim ad minim veniam, quis nostrud exercitation [@neyman1928; @neyman1928a].
+
+::: {#cnj-hypothesis-test}
+## Data Test – Full Version
+
+$$
+\begin{cases}
+\text{H}_{0}: \Delta \ \text{Adjusted} \ \text{R}^{2} \leq \text{MES} \quad \text{or} \quad \text{F-test is not significant} \ (\alpha \geq 0.05) \\
+\text{H}_{a}: \Delta \ \text{Adjusted} \ \text{R}^{2} > \text{MES} \quad \text{and} \quad \text{F-test is significant} \ (\alpha < 0.05)
+\end{cases}
+$$
+:::
+
+###### Heading 6 {#sec-heading-6}
+
+Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae. Salutantibus vitae elit libero, a pharetra augue. Quam diu etiam furor iste tuus nos eludet? Fabio vel iudice vincam, sunt in culpa qui officia^[Ab illo tempore, ab est sed immemorabili (@fig-test-1). Cum sociis natoque penatibus et magnis dis parturient [@markov2006].]. Quam temere in vitiis, legem sancimus haerentia. Quisque ut dolor gravida, placerat libero vel, euismod [@hopfield1984].
+
+```{r}
+#| code-fold: false
+
+data <- data.frame(
+  var1 = rnorm(1000),
+  var2 = rnorm(1000, mean = 2)
+)
+```
+
+::: {#fig-test-1}
+```{r}
+plot <- 
+  data |>
+  ggplot2::ggplot(
+    ggplot2::aes(x = x)
+  ) +
+  geom_histogram(
+    ggplot2::aes(x = var1, y = ggplot2::after_stat(density)),
+    fill = get_brand_color("primary"),
+    bins = 30
+  ) +
+  geom_label(
+    ggplot2::aes(x = 4.5, y = 0.25, label = "Variable 1"),
+    color= get_brand_color("primary")
+  ) +
+  geom_histogram(
+    ggplot2::aes(x = var2, y = -ggplot2::after_stat(density)),
+    fill= get_brand_color("secondary"),
+    bins = 30
+  ) +
+  geom_label(
+    ggplot2::aes(x = 4.5, y = -0.25, label = "Variable 2"),
+    color=get_brand_color("secondary")
+  ) +
+  ggplot2::labs(
+    x = "x Value",
+    y = "Density"
+  )
+
+print(plot) |> rutils::shush()
+```
+
+[Source: [R Graph Gallery](https://r-graph-gallery.com/density_mirror_ggplot2.html)]{.legend}.
+
+Test figure.
+:::
+
+Petierunt uti sibi @sec-heading-2 (`@sec-heading-2`) or simply click [here](#sec-heading-5) (`[here](#sec-heading-2)`) concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum [@lorenz1963].
+
+Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@watson1953].
+
+## References {.unnumbered}
+
+::: {#refs}
+:::
