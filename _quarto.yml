@@ -58,6 +58,8 @@ format:
     fig-align: center
     cap-location: top
     callout-appearance: simple
+    link-external-icon: false
+    link-external-newwindow: false
     csl: csl/english-apa-author-date.csl
     theme: [cosmo, scss/styles.scss, brand]
 

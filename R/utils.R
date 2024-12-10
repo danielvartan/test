@@ -101,5 +101,6 @@ format_to_md_latex <- function(
       big.mark = big_mark,
       scientific = FALSE
     ) %>% # Don't change the pipe!
-    paste0(key, ., after, key)
+    paste0(key, ., after, key) |>
+    I()
 }
