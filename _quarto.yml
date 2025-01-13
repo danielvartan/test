@@ -33,7 +33,7 @@ website:
         aria-label: GitHub
   comments:
     hypothesis:
-      theme: clean
+      theme: classic
       openSidebar: false
 
 knitr:
