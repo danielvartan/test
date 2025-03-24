@@ -8,7 +8,6 @@ project:
   type: website
   output-dir: docs
   render: [index.qmd]
-  post-render: "R/_post-render.R"
 
 title: "Test"
 author: "Daniel Vartanian"
@@ -16,53 +15,19 @@ date: today
 date-format: "YYYY-MM-DD"
 
 website:
-  open-graph: true
   favicon: images/favicon.png
+  open-graph:
+    image: images/og-image.png
+    image-width: 2400
+    image-height: 1600
+    image-alt: "Testing, testing, ... 🎤"
   repo-url: https://github.com/danielvartan/test/
   site-url: https://danielvartan.github.io/test/
   issue-url: https://github.com/danielvartan/test/issues/
   repo-branch: main
-  repo-actions: [edit, source, issue]
-  search: false
-  navbar:
-    title: false
-    background: black
-    right:
-      - icon: github
-        href: https://github.com/danielvartan/test
-        aria-label: GitHub
-  comments:
-    hypothesis:
-      theme: classic
-      openSidebar: false
-
-knitr:
-  opts_chunk:
-    collapse: true
-    comment: "#>"
-    dev: png
-    dev.args:
-      bg: transparent
 
 format:
-  html:
-    toc: true
-    toc-depth: 3
-    toc-location: right
+  revealjs:
     locale: en
-    language: en
-    code-fold: true
-    code-link: true
-    code-tools: true
-    df-print: paged
-    fig-align: center
-    cap-location: top
-    callout-appearance: simple
-    link-external-icon: false
-    link-external-newwindow: false
-    # csl: csl/test.csl
-    csl: csl/english-apa-author-date.csl
-    theme: [cosmo, brand, scss/styles.scss]
 
 google-scholar: false
-bibliography: references.bib
