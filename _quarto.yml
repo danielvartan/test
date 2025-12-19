@@ -1,9 +1,5 @@
 editor: source
 
-execute:
-  cache: false # "Danger Will Robinson!"
-  freeze: false # If you plan to use it, remember to disable it afterward!
-
 project:
   type: website
   output-dir: docs
@@ -12,6 +8,7 @@ project:
 title: "Test"
 author: "Daniel Vartanian"
 date: today
+date-format: long
 
 website:
   favicon: images/favicon.png
@@ -27,34 +24,14 @@ website:
   repo-actions: [edit, source, issue]
   navbar:
       title: false
-      background: "#1e4897"
       right:
         - icon: github
           href: https://github.com/danielvartan/test/
           aria-label: GitHub
 
-lightbox:
-  match: auto
-  effect: fade
-  desc-position: bottom
-  loop: false
-
 format:
   html:
-    toc: true
-    toc-depth: 5
-    toc-location: right
-    locale: en
-    language: en-us
-    code-fold: true
-    code-link: true
-    code-tools: false
-    df-print: paged
-    fig-align: center
-    cap-location: top
-    lightbox: true
-    callout-appearance: simple
     csl: csl/english-apa-author-date.csl
-    theme: [cosmo]
 
 google-scholar: false
+bibliography: references.bib
