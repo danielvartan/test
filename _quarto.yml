@@ -11,12 +11,6 @@ date: today
 date-format: long
 
 website:
-  favicon: images/favicon.png
-  open-graph:
-    image: images/og-image.png
-    image-width: 2400
-    image-height: 1600
-    image-alt: "Testing, testing, ... 🎤"
   repo-url: https://github.com/danielvartan/test/
   site-url: https://danielvartan.github.io/test/
   issue-url: https://github.com/danielvartan/test/issues/
@@ -29,9 +23,4 @@ website:
           href: https://github.com/danielvartan/test/
           aria-label: GitHub
 
-format:
-  html:
-    csl: csl/english-apa-author-date.csl
-
-google-scholar: false
-bibliography: references.bib
+format: html

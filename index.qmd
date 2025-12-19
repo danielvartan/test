@@ -1,30 +1,675 @@
-## Test
-
 Testing, testing, ... 🎤
 
-### A Heading
+## Title 1
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@einstein1905].
+### Subtitle 1
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@watson1953]!
+::: {.callout-note}
+This is a Callout of type 'note'.
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum [@turing1937].
-
-Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@lorenz1963].
-
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@popper2005a]!
-
-#### Another Heading
-
-Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue.
-
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis rhoncus. Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum.
-
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum.
-
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
-
-## References {.unnumbered}
-
-::: {#refs}
+- Here is a bullet point
+- Another bullet point
 :::
+
+Phasellus laoreet lorem vel dolor tempus vehicula. Idque Caesaris facere voluntate liceret: sese habere.
+
+```{r}
+1 + 1
+```
+
+## Title 2
+
+::: {.callout-tip}
+This is a Callout of type 'tip'.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+2 + 2
+```
+
+## Title 3
+
+### Subtitle 3
+
+::: {.callout-warning}
+This is a Callout of type 'warning'.
+
+- Warning bullet point
+- Another warning bullet point
+:::
+
+Ab illo tempore, ab est sed immemorabili. Cum sociis natoque penatibus et magnis dis parturient.
+
+```{r}
+3 + 3
+```
+
+## Title 4
+
+::: {.callout-important}
+This is a Callout of type 'important'.
+:::
+
+Quam diu etiam furor iste tuus nos eludet? Ut enim ad minim veniam, quis nostrud exercitation.
+
+```{r}
+4 + 4
+```
+
+## Title 5
+
+::: {.callout-caution}
+This is a Callout of type 'caution'.
+
+- Caution item one
+- Caution item two
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+5 + 5
+```
+
+## Title 6
+
+### Subtitle 6
+
+::: {.callout-note}
+Another note callout with different content.
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+6 + 6
+```
+
+## Title 7
+
+::: {.callout-tip}
+A helpful tip for the reader.
+
+- Tip point one
+- Tip point two
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+7 + 7
+```
+
+## Title 8
+
+::: {.callout-warning}
+Warning about something important.
+:::
+
+Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue.
+
+```{r}
+8 + 8
+```
+
+## Title 9
+
+### Subtitle 9
+
+::: {.callout-important}
+Critical information here.
+
+- Important detail one
+- Important detail two
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet?
+
+```{r}
+9 + 9
+```
+
+## Title 10
+
+::: {.callout-caution}
+Proceed with caution in this section.
+:::
+
+Ut enim ad minim veniam, quis nostrud exercitation. Mercedem aut nummos unde unde extricat, amaras.
+
+```{r}
+10 + 10
+```
+
+## Title 11
+
+::: {.callout-note}
+Note with additional context.
+
+- Context item one
+- Context item two
+- Context item three
+:::
+
+Praeterea iter est quasdam res quas ex communi. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+11 + 11
+```
+
+## Title 12
+
+### Subtitle 12
+
+::: {.callout-tip}
+Expert tip for advanced users.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+12 + 12
+```
+
+## Title 13
+
+::: {.callout-warning}
+Warning with multiple points.
+
+- First warning
+- Second warning
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+13 + 13
+```
+
+## Title 14
+
+::: {.callout-important}
+Important notice for all readers.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+14 + 14
+```
+
+## Title 15
+
+### Subtitle 15
+
+::: {.callout-caution}
+Exercise caution when applying this.
+
+- Caution detail A
+- Caution detail B
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+15 + 15
+```
+
+## Title 16
+
+::: {.callout-note}
+Informational note for reference.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+16 + 16
+```
+
+## Title 17
+
+::: {.callout-tip}
+Pro tip section.
+
+- Helpful suggestion one
+- Helpful suggestion two
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet?
+
+```{r}
+17 + 17
+```
+
+## Title 18
+
+### Subtitle 18
+
+::: {.callout-warning}
+Proceed with awareness.
+:::
+
+Ut enim ad minim veniam, quis nostrud exercitation. Mercedem aut nummos unde unde extricat, amaras.
+
+```{r}
+18 + 18
+```
+
+## Title 19
+
+::: {.callout-important}
+Key information.
+
+- Key point one
+- Key point two
+- Key point three
+:::
+
+Praeterea iter est quasdam res quas ex communi. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+19 + 19
+```
+
+## Title 20
+
+::: {.callout-caution}
+Handle with care.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+20 + 20
+```
+
+## Title 21
+
+### Subtitle 21
+
+::: {.callout-note}
+Additional notes and observations.
+
+- Observation one
+- Observation two
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+21 + 21
+```
+
+## Title 22
+
+::: {.callout-tip}
+Insider knowledge shared here.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+22 + 22
+```
+
+## Title 23
+
+::: {.callout-warning}
+Alert for potential issues.
+
+- Issue type A
+- Issue type B
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+23 + 23
+```
+
+## Title 24
+
+### Subtitle 24
+
+::: {.callout-important}
+Must-read information.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+24 + 24
+```
+
+## Title 25
+
+::: {.callout-caution}
+Caution advised throughout.
+
+- Advisory point one
+- Advisory point two
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet?
+
+```{r}
+25 + 25
+```
+
+## Title 26
+
+::: {.callout-note}
+Supplementary information.
+:::
+
+Ut enim ad minim veniam, quis nostrud exercitation. Mercedem aut nummos unde unde extricat, amaras.
+
+```{r}
+26 + 26
+```
+
+## Title 27
+
+### Subtitle 27
+
+::: {.callout-tip}
+Best practices guide.
+
+- Practice one
+- Practice two
+- Practice three
+:::
+
+Praeterea iter est quasdam res quas ex communi. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+27 + 27
+```
+
+## Title 28
+
+::: {.callout-warning}
+Warning for specific scenario.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+28 + 28
+```
+
+## Title 29
+
+::: {.callout-important}
+Critical update.
+
+- Update detail one
+- Update detail two
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+29 + 29
+```
+
+## Title 30
+
+### Subtitle 30
+
+::: {.callout-caution}
+Approach carefully.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+30 + 30
+```
+
+## Title 31
+
+::: {.callout-note}
+Background information.
+
+- Background fact one
+- Background fact two
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+31 + 31
+```
+
+## Title 32
+
+::: {.callout-tip}
+Quick tip for efficiency.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+32 + 32
+```
+
+## Title 33
+
+### Subtitle 33
+
+::: {.callout-warning}
+Pay attention to this.
+
+- Attention point A
+- Attention point B
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet?
+
+```{r}
+33 + 33
+```
+
+## Title 34
+
+::: {.callout-important}
+Essential reading.
+:::
+
+Ut enim ad minim veniam, quis nostrud exercitation. Mercedem aut nummos unde unde extricat, amaras.
+
+```{r}
+34 + 34
+```
+
+## Title 35
+
+::: {.callout-caution}
+Cautionary notes.
+
+- Note alpha
+- Note beta
+- Note gamma
+:::
+
+Praeterea iter est quasdam res quas ex communi. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+35 + 35
+```
+
+## Title 36
+
+### Subtitle 36
+
+::: {.callout-note}
+Reference material.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+36 + 36
+```
+
+## Title 37
+
+::: {.callout-tip}
+Advanced technique.
+
+- Technique step one
+- Technique step two
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+37 + 37
+```
+
+## Title 38
+
+::: {.callout-warning}
+Warning about limitations.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+38 + 38
+```
+
+## Title 39
+
+### Subtitle 39
+
+::: {.callout-important}
+Important considerations.
+
+- Consideration one
+- Consideration two
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+39 + 39
+```
+
+## Title 40
+
+::: {.callout-caution}
+Use with discretion.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+40 + 40
+```
+
+## Title 41
+
+::: {.callout-note}
+Explanatory notes.
+
+- Explanation A
+- Explanation B
+- Explanation C
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet?
+
+```{r}
+41 + 41
+```
+
+## Title 42
+
+### Subtitle 42
+
+::: {.callout-tip}
+Optimization tip.
+:::
+
+Ut enim ad minim veniam, quis nostrud exercitation. Mercedem aut nummos unde unde extricat, amaras.
+
+```{r}
+42 + 42
+```
+
+## Title 43
+
+::: {.callout-warning}
+Warning with context.
+
+- Context warning one
+- Context warning two
+:::
+
+Praeterea iter est quasdam res quas ex communi. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+43 + 43
+```
+
+## Title 44
+
+::: {.callout-important}
+Priority information.
+:::
+
+Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili.
+
+```{r}
+44 + 44
+```
+
+## Title 45
+
+### Subtitle 45
+
+::: {.callout-caution}
+Caution for edge cases.
+
+- Edge case one
+- Edge case two
+:::
+
+Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi.
+
+```{r}
+45 + 45
+```
+
+## Title 46
+
+::: {.callout-note}
+Contextual information.
+:::
+
+Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna.
+
+```{r}
+46 + 46
+```
+
+## Title 47
+
+::: {.callout-tip}
+Productivity enhancement.
+
+- Enhancement one
+- Enhancement two
+- Enhancement three
+:::
+
+Salutantibus vitae elit libero, a pharetra augue. Phasellus laoreet lorem vel dolor tempus vehicula.
+
+```{r}
+47 + 47
+```
