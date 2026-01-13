@@ -10,6 +10,8 @@ end
 to go
   user-message "Test"
 
+  error "Test"
+  
   ask patches [
     set pcolor random 140
     set value 999
@@ -56,4 +58,5 @@ end
       </indicator>
     </shape>
   </linkShapes>
+  <previewCommands>setup repeat 75 [ go ]</previewCommands>
 </model>
