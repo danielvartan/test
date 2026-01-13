@@ -31,7 +31,5 @@ website:
 
 format:
   html:
-    csl: csl/english-apa-author-date.csl
-
-google-scholar: false
-bibliography: references.bib
+    callout-appearance: simple
+    # theme: [cosmo, styles.scss]

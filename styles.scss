@@ -1,0 +1,9 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+/* Callouts ----- */
+
+.callout:not(.callout-titled) .callout-body > :last-child, .callout:not(.callout-titled) .callout-body > div > :last-child {
+  margin-bottom: 0.5em;
+}
