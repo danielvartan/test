@@ -1,0 +1,9 @@
+<experiments>
+  <experiment name="Test" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1">
+    <setup>setup</setup>
+    <go>go</go>
+    <metrics>
+      <metric>[value] of patches</metric>
+    </metrics>
+  </experiment>
+</experiments>
