@@ -4,6 +4,6 @@ The image in the next slide is not visible in mobile view.
 
 ## Big Image
 
-![](images/big-image.png)
+![](images/big-image.png){.nostretch style="max-width: 100%; height: auto;"}
 
 ## Thank You!
