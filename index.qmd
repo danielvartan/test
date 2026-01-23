@@ -4,10 +4,6 @@ The image in the next slide is not visible in mobile view.
 
 ## Big Image
 
-![](images/big-image.png){.r-stretch fig-align="center"}
-
-::: footer
-(Footer)
-:::
+![](images/big-image.png)
 
 ## Thank You!
