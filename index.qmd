@@ -1,8 +1,9 @@
 ---
 title: "Test"
 format: html
-bibliography: references.bib
 ---
+
+@einstein2009
 
 ## Test
 
