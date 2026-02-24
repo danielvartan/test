@@ -1,0 +1,17 @@
+<experiments>
+  <experiment name="Test" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1">
+    <setup>setup</setup>
+    <go>go</go>
+    <metrics>
+      <metric>count turtles</metric>
+    </metrics>
+    <constants>
+      <enumeratedValueSet variable="n-turtles">
+        <value value="30"></value>
+      </enumeratedValueSet>
+      <enumeratedValueSet variable="data-path">
+        <value value="&quot;C:/Path/Using/Forward/Slashes&quot;"></value>
+      </enumeratedValueSet>
+    </constants>
+  </experiment>
+</experiments>
