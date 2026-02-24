@@ -10,7 +10,7 @@
         <value value="30"></value>
       </enumeratedValueSet>
       <enumeratedValueSet variable="data-path">
-        <value value="&quot;C:\Path\Using\Backward\Slashes&quot;"></value>
+        <value value="&quot;C:\Path\Using\Backslash&quot;"></value>
       </enumeratedValueSet>
     </constants>
   </experiment>
