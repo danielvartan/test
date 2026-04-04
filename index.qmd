@@ -1,30 +1,212 @@
-## Test
+# Add an `add_tooltip` function
 
-Testing, testing, ... 🎤
+Related to <https://github.com/walkerke/mapgl/discussions/180>.
 
-### A Heading
+Sometimes the data you want to show in a tooltip is not available in the tile properties. I'd like to propose an `add_tooltip()` function that accepts a lookup table and matches its values against a tile property to display the appropriate tooltip on hover.
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@einstein1905].
+## Reproducible Example
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@watson1953]!
+In this example, I use the `code_state` property to match against a lookup table of tooltips.
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum [@turing1937].
+### Set Environment
 
-Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@lorenz1963].
+#### Load Packages
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@popper2005a]!
+```{r}
+library(checkmate)
+library(htmlwidgets)
+library(mapgl)
+library(orbis) # github.com/danielvartan/orbis
+library(pmtiles) # github.com/walkerke/pmtiles
+library(purrr)
+library(tibble)
+library(viridis)
+```
 
-#### Another Heading
+#### Load Custom Functions
 
-Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue.
+This is just a workaround to show what I mean.
 
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis rhoncus. Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum.
+```{r}
+library(checkmate)
+library(htmlwidgets)
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum.
+add_tooltip <- function(map, layer_id, lookup) {
+  assert_class(map, "maplibregl")
+  assert_string(layer_id)
+  assert_atomic_vector(lookup)
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
+  map |>
+    onRender(
+      "
+      function(el, x, data) {
+        const map = el.map || this;
+        const layerId = data.layer_id;
+        const lookup = data.lookup || {};
 
-## References {.unnumbered}
+        if (!map || typeof map.on !== 'function') {
+          return;
+        }
 
-::: {#refs}
-:::
+        const popup = new maplibregl.Popup({
+          closeButton: false,
+          closeOnClick: false,
+          maxWidth: '400px'
+      });
+
+      function resolveId(props) {
+        if (!props) return null;
+
+        const candidates = [
+          props.id,
+          props.ID
+        ];
+
+        for (const value of candidates) {
+          if (value !== undefined && value !== null) {
+            const key = String(value);
+            if (lookup[key] !== undefined) return key;
+          }
+        }
+
+        for (const value of Object.values(props)) {
+          if (value === undefined || value === null) continue;
+          const key = String(value);
+          if (lookup[key] !== undefined) return key;
+        }
+
+        return null;
+      }
+
+      function onMove(e) {
+        if (!map.getLayer(layerId)) return;
+
+        const features = map.queryRenderedFeatures(e.point, { layers: [layerId] });
+        if (!features || features.length === 0) {
+          map.getCanvas().style.cursor = '';
+          popup.remove();
+          return;
+        }
+
+        const props = features[0].properties || {};
+        const id = resolveId(props);
+        const html = id ? lookup[id] : 'No data';
+
+        map.getCanvas().style.cursor = 'pointer';
+        popup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+      }
+
+      function onLeave() {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+      }
+
+      map.on('mousemove', onMove);
+      map.on('mouseout', onLeave);
+    }
+    ",
+      data = list(
+        layer_id = layer_id,
+        lookup = lookup
+      )
+    )
+}
+```
+
+#### Set PMTiles Source
+
+```{r}
+pmtiles_file <- file.path(
+  "https://tiles.pmtiles.com.br",
+  "geobr",
+  "read_state",
+  paste0(
+    # fmt: skip
+    paste(
+      "code", "all",
+      "year", 2020,
+      "simplified", TRUE,
+      "min_zoom", 2,
+      "max_zoom", 10,
+      sep = "-"
+    ),
+    ".pmtiles"
+  )
+)
+```
+
+```{r}
+pmtiles_layer <-
+  pmtiles_file |>
+  pm_show(tilejson = TRUE) |>
+  pluck("vector_layers", 1, "id")
+```
+
+```{r}
+pmtiles_bounds <-
+  pmtiles_file |>
+  pm_show(tilejson = TRUE) |>
+  pluck("bounds") |>
+  unlist()
+```
+
+```{r}
+state_codes <- brazil_state_code() |> unname()
+```
+
+```{r}
+colors <- sample(viridis(27), 27)
+```
+
+```{r}
+fill_color <- match_expr(
+  column = "code_state",
+  values = state_codes,
+  stops = colors,
+  default = "gray"
+)
+```
+
+```{r}
+tooltip_values <-
+  tibble(
+    state_code = state_codes,
+    value = paste0(
+      "<strong>Fill Color: </strong>",
+      colors,
+      "<br/>",
+      "<strong>Respondents: </strong>",
+      sample(1:100, 27)
+    )
+  ) |>
+  deframe()
+```
+
+```{r}
+pmtiles_bounds |>
+  maplibre(
+    bounds = _,
+    projection = "mercator",
+  ) |>
+  add_pmtiles_source(
+    id = "state_borders",
+    url = pmtiles_file,
+    source_type = "vector"
+  ) |>
+  add_fill_layer(
+    id = "state_fill",
+    source = "state_borders",
+    source_layer = pmtiles_layer,
+    fill_color = fill_color,
+    fill_opacity = 1,
+    hover_options = list(
+      fill_color = "gray",
+      fill_opacity = 1
+    )
+  ) |>
+  add_tooltip(
+    layer_id = "state_fill",
+    lookup = tooltip_values
+  )
+```
+
