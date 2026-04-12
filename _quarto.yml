@@ -29,9 +29,4 @@ website:
           href: https://github.com/danielvartan/test/
           aria-label: GitHub
 
-format:
-  html:
-    csl: csl/english-apa-author-date.csl
-
-google-scholar: false
-bibliography: references.bib
+format: html

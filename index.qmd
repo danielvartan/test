@@ -1,30 +1,262 @@
-## Test
+Testing, Testing, ... 🎤
 
-Testing, testing, ... 🎤
+## Set Environment
 
-### A Heading
+```{r}
+#| label: Set Environment
+#| include: false
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@einstein1905].
+library(cli)
+library(httr2)
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@watson1953]!
+if (!is_online()) {
+  cli_abort(
+    paste0(
+      "No {.strong {col_red('internet connection')}} detected. ",
+      "Please check your connection and try again."
+    )
+  )
+}
+```
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum [@turing1937].
+### Load Packages
 
-Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@lorenz1963].
+```{r}
+#| output: false
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@popper2005a]!
+library(cli)
+library(dplyr)
+library(forcats)
+library(geobr)
+library(h3jsr)
+library(here)
+library(httr2)
+library(magrittr)
+library(mapgl)
+library(orbis) # github.com/danielvartan/orbis
+library(pmtiles) # github.com/danielvartan/pmtiles
+library(purrr)
+library(RColorBrewer)
+library(sf)
+```
 
-#### Another Heading
+### Set Parameters
 
-Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue.
+```{r}
+municipality_code <- 2507507
+```
 
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis rhoncus. Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum.
+```{r}
+year <- 2022
+```
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum.
+```{r}
+h3_resolution <- 9
+```
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
+## Set PMTiles
 
-## References {.unnumbered}
+### Set Sources
 
-::: {#refs}
-:::
+```{r}
+#| label: Set PMTiles
+
+municipality_pmtiles <- file.path(
+  "https://tiles.pmtiles.com.br",
+  "geobr",
+  "read_municipality",
+  paste0(
+    # fmt: skip
+    paste(
+      "code", municipality_code,
+      "year", year |> closest_geobr_year(type = "municipality"),
+      "simplified", FALSE,
+      "min_zoom", 2,
+      "max_zoom", 10,
+      sep = "-"
+    ),
+    ".pmtiles"
+  )
+)
+```
+
+```{r}
+municipality_pmtiles_h3 <- file.path(
+  "https://tiles.pmtiles.com.br",
+  "geobr",
+  "read_municipality",
+  "h3jsr",
+  paste("res", h3_resolution, sep = "-"),
+  paste0(
+    # fmt: skip
+    paste(
+      "code", municipality_code,
+      "year", year |> closest_geobr_year(type = "municipality"),
+      "simplified", FALSE,
+      "min_zoom", 2,
+      "max_zoom", 10,
+      sep = "-"
+    ),
+    ".pmtiles"
+  )
+)
+```
+
+### Get Metadata
+
+```{r}
+municipality_pmtiles_layer <-
+  municipality_pmtiles |>
+  pm_show(tilejson = TRUE) |>
+  pluck("vector_layers", 1, "id")
+```
+
+```{r}
+municipality_pmtiles_bounds <-
+  municipality_pmtiles_h3 |>
+  pm_show(tilejson = TRUE) |>
+  pluck("bounds") |>
+  unlist()
+```
+
+## Get Data
+
+### Download Shape
+
+```{r}
+data <-
+  municipality_code |>
+  read_municipality(
+    year = year,
+    simplified = FALSE
+  )
+```
+
+```{r}
+data |> glimpse()
+```
+
+### Transform to H3
+
+```{r}
+data <-
+  data |>
+  st_transform(4326) |>
+  polygon_to_cells(
+    res = h3_resolution,
+    simple = TRUE
+  ) %>%
+  as_tibble() |>
+  set_names("h3_address")
+```
+
+## Plot
+
+### Prepare Data
+
+```{r}
+breaks <- c(-Inf, 0, 3, 5, 10, 15, Inf)
+```
+
+```{r}
+# fmt: skip
+category_labels <- c(
+  "0", "1 - 3", "4 - 5", "6 - 10", "11 - 15", "Above 15"
+)
+```
+
+```{r}
+fill_scale <- brewer.pal(6, "PuRd") |> rev()
+```
+
+```{r}
+category_cut <- function(x) {
+  x |>
+    cut(
+      breaks = breaks,
+      labels = category_labels,
+      include.lowest = TRUE,
+      right = TRUE
+    ) |>
+    factor(
+      ordered = TRUE,
+      levels = category_labels
+    )
+}
+```
+
+```{r}
+plot_data <-
+  data |>
+  mutate(
+    category = 0:19 |>
+      sample(
+        size = n(),
+        replace = TRUE,
+        prob = seq(20, 1)
+      ) |>
+      category_cut(),
+    color = category |>
+      as.character() |>
+      recode_values(
+        from = category |> levels(),
+        to = fill_scale
+      )
+  )
+```
+
+```{r}
+plot_data |> glimpse()
+```
+
+### Plot Map
+
+
+```{r}
+fill_color <- match_expr(
+  column = "h3_address",
+  values = plot_data |> pull(h3_address),
+  stops = plot_data |> pull(color),
+  default = "transparent"
+)
+```
+
+
+```{r}
+municipality_pmtiles_bounds |>
+  maplibre(bounds = _) |>
+  add_pmtiles_source(
+    id = "municipality_boundary",
+    url = municipality_pmtiles,
+    source_type = "vector"
+  ) |>
+  add_fill_layer(
+    id = paste0("municipality_", municipality_code),
+    source = "municipality_boundary",
+    source_layer = municipality_pmtiles_layer,
+    fill_color = "black",
+    fill_opacity = 0.1
+  ) |>
+  add_pmtiles_source(
+    id = paste0("municipality_", municipality_code, "_h3"),
+    url = municipality_pmtiles_h3,
+    source_type = "vector"
+  ) |>
+  add_fill_layer(
+    id = paste0("test", municipality_code),
+    source = paste0("municipality_", municipality_code, "_h3"),
+    source_layer = municipality_pmtiles_layer,
+    fill_color = fill_color,
+    fill_opacity = 1
+  ) |>
+  add_legend(
+    legend_title = NULL,
+    values = category_labels,
+    colors = fill_scale,
+    type = "categorical",
+    layer_id = paste0("test", municipality_code),
+    interactive = TRUE
+    # classification = fill_color
+  ) |>
+  add_screenshot_control()
+```
