@@ -59,28 +59,6 @@ h3_resolution <- 9
 ### Set Sources
 
 ```{r}
-#| label: Set PMTiles
-
-municipality_pmtiles <- file.path(
-  "https://tiles.pmtiles.com.br",
-  "geobr",
-  "read_municipality",
-  paste0(
-    # fmt: skip
-    paste(
-      "code", municipality_code,
-      "year", year |> closest_geobr_year(type = "municipality"),
-      "simplified", FALSE,
-      "min_zoom", 2,
-      "max_zoom", 10,
-      sep = "-"
-    ),
-    ".pmtiles"
-  )
-)
-```
-
-```{r}
 municipality_pmtiles_h3 <- file.path(
   "https://tiles.pmtiles.com.br",
   "geobr",
@@ -103,13 +81,6 @@ municipality_pmtiles_h3 <- file.path(
 ```
 
 ### Get Metadata
-
-```{r}
-municipality_pmtiles_layer <-
-  municipality_pmtiles |>
-  pm_show(tilejson = TRUE) |>
-  pluck("vector_layers", 1, "id")
-```
 
 ```{r}
 municipality_pmtiles_bounds <-
@@ -206,11 +177,10 @@ plot_data <-
 ```
 
 ```{r}
-plot_data |> glimpse()
+plot_data
 ```
 
 ### Plot Map
-
 
 ```{r}
 fill_color <- match_expr(
@@ -226,25 +196,13 @@ fill_color <- match_expr(
 municipality_pmtiles_bounds |>
   maplibre(bounds = _) |>
   add_pmtiles_source(
-    id = "municipality_boundary",
-    url = municipality_pmtiles,
-    source_type = "vector"
-  ) |>
-  add_fill_layer(
-    id = paste0("municipality_", municipality_code),
-    source = "municipality_boundary",
-    source_layer = municipality_pmtiles_layer,
-    fill_color = "black",
-    fill_opacity = 0.1
-  ) |>
-  add_pmtiles_source(
-    id = paste0("municipality_", municipality_code, "_h3"),
+    id = paste0("municipality_h3"),
     url = municipality_pmtiles_h3,
     source_type = "vector"
   ) |>
   add_fill_layer(
-    id = paste0("test", municipality_code),
-    source = paste0("municipality_", municipality_code, "_h3"),
+    id = "test",
+    source = paste0("municipality_h3"),
     source_layer = municipality_pmtiles_layer,
     fill_color = fill_color,
     fill_opacity = 1
@@ -254,9 +212,9 @@ municipality_pmtiles_bounds |>
     values = category_labels,
     colors = fill_scale,
     type = "categorical",
-    layer_id = paste0("test", municipality_code),
+    layer_id = "category",
+    filter_column = "h3_address",
     interactive = TRUE
-    # classification = fill_color
   ) |>
   add_screenshot_control()
 ```
