@@ -83,6 +83,13 @@ municipality_pmtiles_h3 <- file.path(
 ### Get Metadata
 
 ```{r}
+municipality_pmtiles_layer <-
+  municipality_pmtiles_h3 |>
+  pm_show(tilejson = TRUE) |>
+  pluck("vector_layers", 1, "id")
+```
+
+```{r}
 municipality_pmtiles_bounds <-
   municipality_pmtiles_h3 |>
   pm_show(tilejson = TRUE) |>
@@ -191,7 +198,6 @@ fill_color <- match_expr(
 )
 ```
 
-
 ```{r}
 municipality_pmtiles_bounds |>
   maplibre(bounds = _) |>
@@ -212,7 +218,7 @@ municipality_pmtiles_bounds |>
     values = category_labels,
     colors = fill_scale,
     type = "categorical",
-    layer_id = "category",
+    layer_id = "test",
     filter_column = "h3_address",
     interactive = TRUE
   ) |>
