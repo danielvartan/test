@@ -1,18 +1,16 @@
-# Add an `add_tooltip` function
-
 Related to <https://github.com/walkerke/mapgl/discussions/180>.
 
 Sometimes the data you want to show in a tooltip is not available in the tile properties. I'd like to propose an `add_tooltip()` function that accepts a lookup table and matches its values against a tile property to display the appropriate tooltip on hover.
 
-## Reproducible Example
+In this example, I use the `code_state` field to match against a lookup table of tooltips.
 
-In this example, I use the `code_state` property to match against a lookup table of tooltips.
+## Set Environment
 
-### Set Environment
-
-#### Load Packages
+### Load Packages
 
 ```{r}
+#| output: false
+
 library(checkmate)
 library(htmlwidgets)
 library(mapgl)
@@ -23,7 +21,7 @@ library(tibble)
 library(viridis)
 ```
 
-#### Load Custom Functions
+### Load Custom Functions
 
 This is just a workaround to show what I mean.
 
@@ -113,7 +111,7 @@ add_tooltip <- function(map, layer_id, lookup) {
 }
 ```
 
-#### Set PMTiles Source
+### Set PMTiles Source
 
 ```{r}
 pmtiles_file <- file.path(
@@ -150,6 +148,8 @@ pmtiles_bounds <-
   unlist()
 ```
 
+## Plot Map
+
 ```{r}
 state_codes <- brazil_state_code() |> unname()
 ```
@@ -183,6 +183,8 @@ tooltip_values <-
 ```
 
 ```{r}
+#| message: false
+
 pmtiles_bounds |>
   maplibre(
     bounds = _,
