@@ -1,9 +1,0 @@
-.Rapp.history
-.RData
-.Renviron
-.Rhistory
-.Rproj.user
-.Ruserdata
-**/*.quarto_ipynb
-/_freeze/
-/.quarto/

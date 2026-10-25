@@ -1,30 +1,903 @@
-## Test
+# Ark LSP deadlock repro
 
-Testing, testing, ... 🎤
+Open this file, start (or restart) an R session, and watch the Ark kernel log. With enough R cells, the LSP main loop hangs a few seconds after startup and console input stays on "Submitting...".
 
-### A Heading
+```{r}
+#| label: cell-1
+x_1 <- 1
+x_1
+```
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@einstein1905].
+```{r}
+#| label: cell-2
+x_2 <- 2
+x_2
+```
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@watson1953]!
+```{r}
+#| label: cell-3
+x_3 <- 3
+x_3
+```
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum [@turing1937].
+```{r}
+#| label: cell-4
+x_4 <- 4
+x_4
+```
 
-Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere [@lorenz1963].
+```{r}
+#| label: cell-5
+x_5 <- 5
+x_5
+```
 
-Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque [@popper2005a]!
+```{r}
+#| label: cell-6
+x_6 <- 6
+x_6
+```
 
-#### Another Heading
+```{r}
+#| label: cell-7
+x_7 <- 7
+x_7
+```
 
-Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue.
+```{r}
+#| label: cell-8
+x_8 <- 8
+x_8
+```
 
-Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis rhoncus. Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum.
+```{r}
+#| label: cell-9
+x_9 <- 9
+x_9
+```
 
-Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum.
+```{r}
+#| label: cell-10
+x_10 <- 10
+x_10
+```
 
-Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
+```{r}
+#| label: cell-11
+x_11 <- 11
+x_11
+```
 
-## References {.unnumbered}
+```{r}
+#| label: cell-12
+x_12 <- 12
+x_12
+```
 
-::: {#refs}
-:::
+```{r}
+#| label: cell-13
+x_13 <- 13
+x_13
+```
+
+```{r}
+#| label: cell-14
+x_14 <- 14
+x_14
+```
+
+```{r}
+#| label: cell-15
+x_15 <- 15
+x_15
+```
+
+```{r}
+#| label: cell-16
+x_16 <- 16
+x_16
+```
+
+```{r}
+#| label: cell-17
+x_17 <- 17
+x_17
+```
+
+```{r}
+#| label: cell-18
+x_18 <- 18
+x_18
+```
+
+```{r}
+#| label: cell-19
+x_19 <- 19
+x_19
+```
+
+```{r}
+#| label: cell-20
+x_20 <- 20
+x_20
+```
+
+```{r}
+#| label: cell-21
+x_21 <- 21
+x_21
+```
+
+```{r}
+#| label: cell-22
+x_22 <- 22
+x_22
+```
+
+```{r}
+#| label: cell-23
+x_23 <- 23
+x_23
+```
+
+```{r}
+#| label: cell-24
+x_24 <- 24
+x_24
+```
+
+```{r}
+#| label: cell-25
+x_25 <- 25
+x_25
+```
+
+```{r}
+#| label: cell-26
+x_26 <- 26
+x_26
+```
+
+```{r}
+#| label: cell-27
+x_27 <- 27
+x_27
+```
+
+```{r}
+#| label: cell-28
+x_28 <- 28
+x_28
+```
+
+```{r}
+#| label: cell-29
+x_29 <- 29
+x_29
+```
+
+```{r}
+#| label: cell-30
+x_30 <- 30
+x_30
+```
+
+```{r}
+#| label: cell-31
+x_31 <- 31
+x_31
+```
+
+```{r}
+#| label: cell-32
+x_32 <- 32
+x_32
+```
+
+```{r}
+#| label: cell-33
+x_33 <- 33
+x_33
+```
+
+```{r}
+#| label: cell-34
+x_34 <- 34
+x_34
+```
+
+```{r}
+#| label: cell-35
+x_35 <- 35
+x_35
+```
+
+```{r}
+#| label: cell-36
+x_36 <- 36
+x_36
+```
+
+```{r}
+#| label: cell-37
+x_37 <- 37
+x_37
+```
+
+```{r}
+#| label: cell-38
+x_38 <- 38
+x_38
+```
+
+```{r}
+#| label: cell-39
+x_39 <- 39
+x_39
+```
+
+```{r}
+#| label: cell-40
+x_40 <- 40
+x_40
+```
+
+```{r}
+#| label: cell-41
+x_41 <- 41
+x_41
+```
+
+```{r}
+#| label: cell-42
+x_42 <- 42
+x_42
+```
+
+```{r}
+#| label: cell-43
+x_43 <- 43
+x_43
+```
+
+```{r}
+#| label: cell-44
+x_44 <- 44
+x_44
+```
+
+```{r}
+#| label: cell-45
+x_45 <- 45
+x_45
+```
+
+```{r}
+#| label: cell-46
+x_46 <- 46
+x_46
+```
+
+```{r}
+#| label: cell-47
+x_47 <- 47
+x_47
+```
+
+```{r}
+#| label: cell-48
+x_48 <- 48
+x_48
+```
+
+```{r}
+#| label: cell-49
+x_49 <- 49
+x_49
+```
+
+```{r}
+#| label: cell-50
+x_50 <- 50
+x_50
+```
+
+```{r}
+#| label: cell-51
+x_51 <- 51
+x_51
+```
+
+```{r}
+#| label: cell-52
+x_52 <- 52
+x_52
+```
+
+```{r}
+#| label: cell-53
+x_53 <- 53
+x_53
+```
+
+```{r}
+#| label: cell-54
+x_54 <- 54
+x_54
+```
+
+```{r}
+#| label: cell-55
+x_55 <- 55
+x_55
+```
+
+```{r}
+#| label: cell-56
+x_56 <- 56
+x_56
+```
+
+```{r}
+#| label: cell-57
+x_57 <- 57
+x_57
+```
+
+```{r}
+#| label: cell-58
+x_58 <- 58
+x_58
+```
+
+```{r}
+#| label: cell-59
+x_59 <- 59
+x_59
+```
+
+```{r}
+#| label: cell-60
+x_60 <- 60
+x_60
+```
+
+```{r}
+#| label: cell-61
+x_61 <- 61
+x_61
+```
+
+```{r}
+#| label: cell-62
+x_62 <- 62
+x_62
+```
+
+```{r}
+#| label: cell-63
+x_63 <- 63
+x_63
+```
+
+```{r}
+#| label: cell-64
+x_64 <- 64
+x_64
+```
+
+```{r}
+#| label: cell-65
+x_65 <- 65
+x_65
+```
+
+```{r}
+#| label: cell-66
+x_66 <- 66
+x_66
+```
+
+```{r}
+#| label: cell-67
+x_67 <- 67
+x_67
+```
+
+```{r}
+#| label: cell-68
+x_68 <- 68
+x_68
+```
+
+```{r}
+#| label: cell-69
+x_69 <- 69
+x_69
+```
+
+```{r}
+#| label: cell-70
+x_70 <- 70
+x_70
+```
+
+```{r}
+#| label: cell-71
+x_71 <- 71
+x_71
+```
+
+```{r}
+#| label: cell-72
+x_72 <- 72
+x_72
+```
+
+```{r}
+#| label: cell-73
+x_73 <- 73
+x_73
+```
+
+```{r}
+#| label: cell-74
+x_74 <- 74
+x_74
+```
+
+```{r}
+#| label: cell-75
+x_75 <- 75
+x_75
+```
+
+```{r}
+#| label: cell-76
+x_76 <- 76
+x_76
+```
+
+```{r}
+#| label: cell-77
+x_77 <- 77
+x_77
+```
+
+```{r}
+#| label: cell-78
+x_78 <- 78
+x_78
+```
+
+```{r}
+#| label: cell-79
+x_79 <- 79
+x_79
+```
+
+```{r}
+#| label: cell-80
+x_80 <- 80
+x_80
+```
+
+```{r}
+#| label: cell-81
+x_81 <- 81
+x_81
+```
+
+```{r}
+#| label: cell-82
+x_82 <- 82
+x_82
+```
+
+```{r}
+#| label: cell-83
+x_83 <- 83
+x_83
+```
+
+```{r}
+#| label: cell-84
+x_84 <- 84
+x_84
+```
+
+```{r}
+#| label: cell-85
+x_85 <- 85
+x_85
+```
+
+```{r}
+#| label: cell-86
+x_86 <- 86
+x_86
+```
+
+```{r}
+#| label: cell-87
+x_87 <- 87
+x_87
+```
+
+```{r}
+#| label: cell-88
+x_88 <- 88
+x_88
+```
+
+```{r}
+#| label: cell-89
+x_89 <- 89
+x_89
+```
+
+```{r}
+#| label: cell-90
+x_90 <- 90
+x_90
+```
+
+```{r}
+#| label: cell-91
+x_91 <- 91
+x_91
+```
+
+```{r}
+#| label: cell-92
+x_92 <- 92
+x_92
+```
+
+```{r}
+#| label: cell-93
+x_93 <- 93
+x_93
+```
+
+```{r}
+#| label: cell-94
+x_94 <- 94
+x_94
+```
+
+```{r}
+#| label: cell-95
+x_95 <- 95
+x_95
+```
+
+```{r}
+#| label: cell-96
+x_96 <- 96
+x_96
+```
+
+```{r}
+#| label: cell-97
+x_97 <- 97
+x_97
+```
+
+```{r}
+#| label: cell-98
+x_98 <- 98
+x_98
+```
+
+```{r}
+#| label: cell-99
+x_99 <- 99
+x_99
+```
+
+```{r}
+#| label: cell-100
+x_100 <- 100
+x_100
+```
+
+```{r}
+#| label: cell-101
+x_101 <- 101
+x_101
+```
+
+```{r}
+#| label: cell-102
+x_102 <- 102
+x_102
+```
+
+```{r}
+#| label: cell-103
+x_103 <- 103
+x_103
+```
+
+```{r}
+#| label: cell-104
+x_104 <- 104
+x_104
+```
+
+```{r}
+#| label: cell-105
+x_105 <- 105
+x_105
+```
+
+```{r}
+#| label: cell-106
+x_106 <- 106
+x_106
+```
+
+```{r}
+#| label: cell-107
+x_107 <- 107
+x_107
+```
+
+```{r}
+#| label: cell-108
+x_108 <- 108
+x_108
+```
+
+```{r}
+#| label: cell-109
+x_109 <- 109
+x_109
+```
+
+```{r}
+#| label: cell-110
+x_110 <- 110
+x_110
+```
+
+```{r}
+#| label: cell-111
+x_111 <- 111
+x_111
+```
+
+```{r}
+#| label: cell-112
+x_112 <- 112
+x_112
+```
+
+```{r}
+#| label: cell-113
+x_113 <- 113
+x_113
+```
+
+```{r}
+#| label: cell-114
+x_114 <- 114
+x_114
+```
+
+```{r}
+#| label: cell-115
+x_115 <- 115
+x_115
+```
+
+```{r}
+#| label: cell-116
+x_116 <- 116
+x_116
+```
+
+```{r}
+#| label: cell-117
+x_117 <- 117
+x_117
+```
+
+```{r}
+#| label: cell-118
+x_118 <- 118
+x_118
+```
+
+```{r}
+#| label: cell-119
+x_119 <- 119
+x_119
+```
+
+```{r}
+#| label: cell-120
+x_120 <- 120
+x_120
+```
+
+```{r}
+#| label: cell-121
+x_121 <- 121
+x_121
+```
+
+```{r}
+#| label: cell-122
+x_122 <- 122
+x_122
+```
+
+```{r}
+#| label: cell-123
+x_123 <- 123
+x_123
+```
+
+```{r}
+#| label: cell-124
+x_124 <- 124
+x_124
+```
+
+```{r}
+#| label: cell-125
+x_125 <- 125
+x_125
+```
+
+```{r}
+#| label: cell-126
+x_126 <- 126
+x_126
+```
+
+```{r}
+#| label: cell-127
+x_127 <- 127
+x_127
+```
+
+```{r}
+#| label: cell-128
+x_128 <- 128
+x_128
+```
+
+```{r}
+#| label: cell-129
+x_129 <- 129
+x_129
+```
+
+```{r}
+#| label: cell-130
+x_130 <- 130
+x_130
+```
+
+```{r}
+#| label: cell-131
+x_131 <- 131
+x_131
+```
+
+```{r}
+#| label: cell-132
+x_132 <- 132
+x_132
+```
+
+```{r}
+#| label: cell-133
+x_133 <- 133
+x_133
+```
+
+```{r}
+#| label: cell-134
+x_134 <- 134
+x_134
+```
+
+```{r}
+#| label: cell-135
+x_135 <- 135
+x_135
+```
+
+```{r}
+#| label: cell-136
+x_136 <- 136
+x_136
+```
+
+```{r}
+#| label: cell-137
+x_137 <- 137
+x_137
+```
+
+```{r}
+#| label: cell-138
+x_138 <- 138
+x_138
+```
+
+```{r}
+#| label: cell-139
+x_139 <- 139
+x_139
+```
+
+```{r}
+#| label: cell-140
+x_140 <- 140
+x_140
+```
+
+```{r}
+#| label: cell-141
+x_141 <- 141
+x_141
+```
+
+```{r}
+#| label: cell-142
+x_142 <- 142
+x_142
+```
+
+```{r}
+#| label: cell-143
+x_143 <- 143
+x_143
+```
+
+```{r}
+#| label: cell-144
+x_144 <- 144
+x_144
+```
+
+```{r}
+#| label: cell-145
+x_145 <- 145
+x_145
+```
+
+```{r}
+#| label: cell-146
+x_146 <- 146
+x_146
+```
+
+```{r}
+#| label: cell-147
+x_147 <- 147
+x_147
+```
+
+```{r}
+#| label: cell-148
+x_148 <- 148
+x_148
+```
+
+```{r}
+#| label: cell-149
+x_149 <- 149
+x_149
+```
+
+```{r}
+#| label: cell-150
+x_150 <- 150
+x_150
+```
